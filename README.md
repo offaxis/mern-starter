@@ -3,4 +3,6 @@
 
 Based on [MERN.io](http://mern.io/)
 
-User login with JWT (Passport auth)
+## Specs added
+* JWT Login (Passport auth)
+* Live interractions with Socket.io
