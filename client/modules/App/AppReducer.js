@@ -1,6 +1,5 @@
 // Import Actions
 import { INIT_SOCKET, SEND_SOCKET, RECEIVE_SOCKET } from './AppActions';
-import { ADD_MESSAGE } from '../Message/MessageActions';
 
 // Initial State
 const initialState = {

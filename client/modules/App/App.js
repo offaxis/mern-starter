@@ -15,15 +15,10 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 
-import RoomListPage from '../Room/pages/RoomListPage/RoomListPage';
-
 // Import Actions
 import { initSocket, sendSocket } from './AppActions';
 import { switchLanguage } from '../Intl/IntlActions';
-import { logoutUser, isLoggedIn, usersConnected, userDisconnected, setUserIsWritting } from '../User/UserActions';
-import { addRoom } from '../Room/RoomActions';
-import { receiveMessage } from '../Message/MessageActions';
-
+import { logoutUser, isLoggedIn, usersConnected, userDisconnected } from '../User/UserActions';
 
 const socket = io('');
 
@@ -47,28 +42,12 @@ export class App extends Component {
 
         // this.props.dispatch(subscribeUser(this.props.user));
 
-        socket.on('receiveMessage', message => {
-            this.props.dispatch(receiveMessage(message));
-        });
-
         socket.on('connectedUsers', users => {
             this.props.dispatch(usersConnected(users));
         });
 
         socket.on('userDisconnected', user => {
             this.props.dispatch(userDisconnected(user));
-        });
-
-        socket.on('roomAdded', room => {
-            this.props.dispatch(addRoom(room));
-        });
-
-        socket.on('userIsWritting', user => {
-            this.props.dispatch(setUserIsWritting(user, 1));
-        });
-
-        socket.on('userStopWritting', user => {
-            this.props.dispatch(setUserIsWritting(user, 0));
         });
     }
 
@@ -96,7 +75,6 @@ export class App extends Component {
                                     ?
                                         <Row>
                                             <Col sm="4">
-                                                <RoomListPage />
                                             </Col>
                                             <Col sm="8">
                                                 {this.props.children}

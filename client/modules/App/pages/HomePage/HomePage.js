@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Jumbotron, ButtonGroup, Button, Alert } from 'reactstrap';
 
-import UserLoginForm from '../../../User/components/UserLoginForm';
-
 
 export class HomePage extends Component {
 
@@ -26,17 +24,17 @@ export class HomePage extends Component {
                         <Jumbotron className="text-center">
                             <h1 className="display-3">Let's Rock !</h1>
                             <Alert color="info" className="text-center">
-                                Join a room and start the experience !
+                                Start the experience !
                             </Alert>
                         </Jumbotron>
                     :
                         <div>
                             <Jumbotron className="text-center">
                                 <h1 className="display-3">Hello, world!</h1>
-                                <p className="lead">This is a live chat example made with React, Redux, ExpressJs & MongoDb with real time interactions !</p>
+                                <p className="lead">This is a Starter !</p>
                                 <hr className="my-2" />
                                 <p>
-                                Let's start by creating your account simply !
+                                    Let's start by creating your account simply !
                                 </p>
                                 <div className="lead">
                                     <ButtonGroup>
