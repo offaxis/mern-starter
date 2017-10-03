@@ -54,8 +54,8 @@ export default class Header extends Component {
     renderNotifications() {
         var distinctRooms = [];
         var notificationsList = '';
-        if(this.props.user.unreadMessages) {
-            notificationsList = this.props.user.unreadMessages.map(message => {
+        if(this.props.user.notifications) {
+            notificationsList = this.props.user.notifications.map(message => {
                 if(distinctRooms.indexOf(message.room) == -1) {
                     distinctRooms.push(message.room);
                     return (
@@ -69,7 +69,7 @@ export default class Header extends Component {
         return (
             <NavDropdown isOpen={this.state.dropdownNotificationsOpen} toggle={this.toggleDropdownNotifications}>
                 <DropdownToggle caret>
-                    <Badge color="primary" pill>{this.props.user.unreadMessages ? this.props.user.unreadMessages.length : 0 }</Badge>
+                    <Badge color="primary" pill>{this.props.user.notifications ? this.props.user.notifications.length : 0 }</Badge>
                 </DropdownToggle>
                 <DropdownMenu>
                     {notificationsList}
@@ -83,7 +83,7 @@ export default class Header extends Component {
             <div>
                 <Navbar color="faded" light toggleable>
                     <NavbarToggler right onClick={this.toggle} />
-                    <NavbarBrand tag={Link} to="/">OffAxis/Chat</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/">Mern Starter</NavbarBrand>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
 

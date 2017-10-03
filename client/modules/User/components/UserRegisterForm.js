@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Row, Col, Card, CardHeader, CardBlock, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 
