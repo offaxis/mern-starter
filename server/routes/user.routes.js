@@ -13,8 +13,6 @@ const requireLogin = passport.authenticate('local', { session: false });
 
 router.get('/users', requireAuth, UserController.getUsers);
 
-router.get('/user/getjoinedrooms', requireAuth, UserController.getJoinedRooms);
-
 router.get('/user/getloggeduser', requireAuth, AuthController.isLoggedIn);
 
 router.post('/user/login', requireLogin, AuthController.login);

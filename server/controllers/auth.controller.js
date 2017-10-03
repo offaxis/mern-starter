@@ -10,7 +10,7 @@ export function login(req, res) {
         res.status(403).end();
     }
 
-    User.findOne({email: req.body.email/*, password: req.body.password*/}).exec((err, user) => {
+    User.findOne({email: req.body.email.toLowerCase()/*, password: req.body.password*/}).exec((err, user) => {
         if(err) {
             res.status(500).send(err);
         }
@@ -33,12 +33,12 @@ export function register(req, res) {
         res.status(403).end();
     }
 
-    User.findOne({email: req.body.email}).exec((err, user) => {
+    User.findOne({email: req.body.email.toLowerCase()}).exec((err, user) => {
         if(err) {
             res.status(500).send(err);
         } else if(!user) {
             const newUser = new User({
-                email: req.body.email,
+                email: req.body.email.toLowerCase(),
                 password: req.body.password,
                 name: req.body.name
             });
