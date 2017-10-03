@@ -70,9 +70,6 @@ app.use(Express.static(path.resolve(__dirname, '../dist/client')));
 
 // app.use('/api', posts);
 app.use('/api', users);
-app.use('/api', rooms);
-app.use('/api', messages);
-
 
 
 // Render Initial HTML
