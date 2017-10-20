@@ -1,8 +1,8 @@
+import { browserHistory } from 'react-router';
 import callApi from '../../util/apiCaller';
 
-import { browserHistory } from 'react-router';
-
 import { sendSocket } from '../App/AppActions';
+import { displayErrors } from '../Error/ErrorActions';
 
 // Export Constants
 export const REGISTER_USER = 'REGISTER_USER';
@@ -14,14 +14,20 @@ export const DISCONNECTED_USER = 'DISCONNECTED_USER';
 
 
 // Export Actions
-export function registerRequest(email, password, name) {
+export function registerRequest(user) {
     return (dispatch) => {
-        return callApi('user/register', 'post', {email: email, password: password, name: name}).then(res => {
-            console.log(res);
+        return callApi('user/register', 'post', {user: user}).then(res => {
             if(res.user) {
-                // dispatch(registerUser(res.user, res.token));
+                browserHistory.push('/');
                 dispatch(loginUser(res.user, res.token));
                 dispatch(isLoggedIn());
+                displayErrors('success', `Bienvenue ${res.user.firstname} !`);
+            } else {
+                if(res.error == 'userAlreadyExists') {
+                    displayErrors('warning', `Un compte existe déjà avec cette adresse email : ${user.email}`);
+                } else {
+                    displayErrors('error', "Impossible de créer votre compte ! Veuillez réessayer...");
+                }
             }
         });
     };
@@ -31,8 +37,12 @@ export function loginRequest(email, password) {
     return (dispatch) => {
         return callApi('user/login', 'post', {email: email, password: password}).then(res => {
             if(res.user) {
+                browserHistory.push('/');
                 dispatch(loginUser(res.user, res.token));
                 dispatch(isLoggedIn());
+                displayErrors('success', `Bienvenue ${res.user.firstname} !`);
+            } else {
+                displayErrors('error', 'Veuillez vérifier vos identifiants de connexion !');
             }
         });
     }
@@ -44,7 +54,6 @@ export function isLoggedIn() {
         return callApi('user/getloggeduser').then(res => {
             if(res.user) {
                 dispatch(loginUser(res.user, res.token));
-                dispatch(getUserJoinedRoomsRequest(res.user));
                 dispatch(sendSocket({type: 'userConnection', data: res.user}));
             } else {
                 dispatch(logoutUser());

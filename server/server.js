@@ -32,9 +32,16 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+
+//Routes
 import users from './routes/user.routes';
+
+
 // import dummyData from './dummyData';
 import serverConfig from './config';
+
+// Passport configuration
+import passportService from './passport';
 
 // Socket.io
 import SocketIo from 'socket.io';

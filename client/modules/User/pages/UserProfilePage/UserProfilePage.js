@@ -4,7 +4,6 @@ import { Row, Col, Card, CardHeader, CardBlock, ButtonGroup, Button } from 'reac
 
 // Import Components
 
-
 class UserProfilePage extends Component {
 
     constructor(props) {
@@ -21,11 +20,16 @@ class UserProfilePage extends Component {
 
                         <Card>
                             <CardHeader>
-                                <h1>{this.props.user.name}</h1>
+                                <h1>{this.props.user.firstname} {this.props.user.lastname}</h1>
                             </CardHeader>
                             <CardBlock>
-                                Email : {this.props.user.email}<br />
-                                Role : {this.props.user.role}
+                                <Row>
+                                    <Col>
+                                        Email : {this.props.user.email}<br />
+                                    </Col>
+                                    <Col>
+                                    </Col>
+                                </Row>
                             </CardBlock>
                         </Card>
                 : null

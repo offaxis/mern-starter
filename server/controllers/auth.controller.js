@@ -11,7 +11,7 @@ export function login(req, res) {
     }
 
     User.findOne({email: req.body.email.toLowerCase()/*, password: req.body.password*/}).exec((err, user) => {
-        if(err) {
+        if(err || !user) {
             res.status(500).send(err);
         }
         // res.json({user: user});
@@ -29,18 +29,21 @@ export function login(req, res) {
 
 
 export function register(req, res) {
-    if(!(req.body.email && req.body.password && req.body.name)) {
+    if(!(req.body.user)) {
         res.status(403).end();
     }
 
-    User.findOne({email: req.body.email.toLowerCase()}).exec((err, user) => {
+    User.findOne({email: req.body.user.email.toLowerCase()}).exec((err, user) => {
         if(err) {
             res.status(500).send(err);
+        } else if(user) {
+            res.status(500).json({error: 'userAlreadyExists'});
         } else if(!user) {
             const newUser = new User({
-                email: req.body.email.toLowerCase(),
-                password: req.body.password,
-                name: req.body.name
+                email: req.body.user.email.toLowerCase(),
+                password: req.body.user.password,
+                lastname: req.body.user.lastname,
+                firstname: req.body.user.firstname
             });
 
             newUser.cuid = cuid();
